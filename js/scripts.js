@@ -13,28 +13,7 @@ const globalVersion = 0.2;
             $(parallaxSection).addClass('ios-device');
         })
     }
-})
-
-/***************************************************************************************************************************************************/
-/* Converted From (Call to Action Metric) Control */
-/***************************************************************************************************************************************************/
-var convertedFrom = 'WebSite'
-function setConvertedFrom(callToAction) {
-    convertedFrom = callToAction
-}
-
-/***************************************************************************************************************************************************/
-/* Pop-Up */
-/***************************************************************************************************************************************************/
-function spawnOnLoadPopup(afterSeconds) {
-    new Promise((resolve) => setTimeout(resolve, afterSeconds * 1000)).then(() => {
-        document.getElementById('onload-popup-button').click();
-    });
-}
-function closePopupAndSetConvertedFrom(closeButtonId, convertedFrom) {
-    document.getElementById(closeButtonId).click();
-    setConvertedFrom(convertedFrom);
-}
+});
 
 /***************************************************************************************************************************************************/
 /* Start JQuery */
@@ -65,23 +44,6 @@ function closePopupAndSetConvertedFrom(closeButtonId, convertedFrom) {
         startCardSlider();
         hidePreloader();
     });
-
-    /***************************************************************************************************************************************************/
-    /* Get Geolocation */
-    /***************************************************************************************************************************************************/
-    var latitude = null
-    var longitude = null
-
-    function getGeolocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        }
-    }
-
-    function showPosition(position) {
-        latitude = position.coords.latitude
-        longitude = position.coords.longitude
-    }
 
     /***************************************************************************************************************************************************/
     /* Navbar Scripts */
