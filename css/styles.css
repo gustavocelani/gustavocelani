@@ -1020,15 +1020,6 @@ input[type='checkbox'] {
 	padding-top: 6.5rem;
 	padding-bottom: 4.25rem;
 	background-color: #2c383d;
-	background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/backgrounds/talking.jpg') center center no-repeat;
-	background-size: cover;
-
-	/* Create the parallax scrolling effect */
-	min-height: 500px;
-	background-attachment: fixed;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 .tabs {
@@ -1514,7 +1505,7 @@ input[type='checkbox'] {
 	padding-top: 6.5rem;
 	padding-bottom: 4.25rem;
 	background-color: #2c383d;
-	background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/backgrounds/folks-bw.jpg') center center no-repeat;
+	background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/backgrounds/compsoft-computer-bw.jpg') center center no-repeat;
 	background-size: cover;
 
 	/* Create the parallax scrolling effect */
@@ -1529,7 +1520,7 @@ input[type='checkbox'] {
 	padding-top: 6.5rem;
 	padding-bottom: 4.25rem;
 	background-color: #2c383d;
-	background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/backgrounds/talking.jpg') center center no-repeat;
+	background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/backgrounds/compsoft-talking-bw.jpg') center center no-repeat;
 	background-size: cover;
 
 	/* Create the parallax scrolling effect */

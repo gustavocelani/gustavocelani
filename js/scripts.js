@@ -37,6 +37,8 @@ const globalVersion = 0.2;
 
         // Dynamically Populated Content
         populateTestimonials();
+        populateAgendaSlider();
+        populateImagesSlider();
 
         // Starting Animations and Interactions
         startLightboxAnimation();
@@ -137,7 +139,7 @@ const globalVersion = 0.2;
                 prevEl: '.swiper-button-prev',
             },
             spaceBetween: 30,
-            slidesPerView: 5,
+            slidesPerView: 3,
             breakpoints: {
                 // when window is <= 380px
                 380: {
@@ -161,7 +163,7 @@ const globalVersion = 0.2;
                 },
                 // when window is <= 1200px
                 1200: {
-                    slidesPerView: 5,
+                    slidesPerView: 3,
                     spaceBetween: 30
                 },
             }
@@ -308,6 +310,61 @@ const globalVersion = 0.2;
         });
 
         $('#testimonials-slider').html(testimonialHtmlEntry);
+    }
+
+    /***************************************************************************************************************************************************/
+    /* Dynamically Populate Agenda */
+    /***************************************************************************************************************************************************/
+    function populateAgendaSlider() {
+        var images = [
+            'profile04.jpg',
+            'profile05.jpg',
+            'profile01.png',
+        ]
+
+        var imagesHtmlEntry = ''
+        images.forEach(image => {
+            imagesHtmlEntry += '\
+            <div class="swiper-slide ">\n\
+                <a target="_blank" href="images/gustavo/' + image + '" download>\n\
+                    <img class="img-fluid" src="images/gustavo/' + image + '">\n\
+                </a>\n\
+            </div>\n\n'
+        });
+
+        $('#images-slider').html(imagesHtmlEntry);
+    }
+
+    /***************************************************************************************************************************************************/
+    /* Dynamically Populate Imagens & Recursos Graficos */
+    /***************************************************************************************************************************************************/
+    function populateImagesSlider() {
+        var events = [
+            {
+                'img': '2023 - MindTheSec.jpeg',
+                'url': 'https://www.mindthesec.com.br/'
+            },
+            {
+                'img': '2023 - HackTown.png',
+                'url': 'https://hacktown.com.br/'
+            },
+            {
+                'img': '2023 - CompSoft.png',
+                'url': 'https://inatel.br/compsoft'
+            },
+        ]
+
+        var agendaHtmlEntry = ''
+        events.forEach(event => {
+            agendaHtmlEntry += '\
+            <div class="swiper-slide">\n\
+                <a target="_blank" href="' + event['url'] + '">\n\
+                    <img class="img-fluid" src="images/agenda/' + event['img'] + '">\n\
+                </a>\n\
+            </div>\n\n'
+        });
+
+        $('#agenda-slider').html(agendaHtmlEntry);
     }
 
 })(jQuery);
