@@ -139,7 +139,7 @@ const globalVersion = 0.2;
                 prevEl: '.swiper-button-prev',
             },
             spaceBetween: 30,
-            slidesPerView: 3,
+            slidesPerView: 4,
             breakpoints: {
                 // when window is <= 380px
                 380: {
@@ -158,12 +158,12 @@ const globalVersion = 0.2;
                 },
                 // when window is <= 992px
                 992: {
-                    slidesPerView: 2,
+                    slidesPerView: 3,
                     spaceBetween: 20
                 },
                 // when window is <= 1200px
                 1200: {
-                    slidesPerView: 3,
+                    slidesPerView: 4,
                     spaceBetween: 30
                 },
             }
@@ -342,15 +342,23 @@ const globalVersion = 0.2;
         var events = [
             {
                 'img': '2023 - MindTheSec.jpeg',
-                'url': 'https://www.mindthesec.com.br/'
+                'url': 'https://www.mindthesec.com.br/',
+                'txt': 'Mind The Sec 2023'
+            },
+            {
+                'img': '2023 - Cybersecurity Talks.png',
+                'url': 'https://cybersecuritytalks.com.br',
+                'txt': 'Cybersecurity Talks 2023'
             },
             {
                 'img': '2023 - HackTown.png',
-                'url': 'https://hacktown.com.br/'
+                'url': 'https://hacktown.com.br/',
+                'txt': 'HackTown 2023'
             },
             {
                 'img': '2023 - CompSoft.png',
-                'url': 'https://inatel.br/compsoft'
+                'url': 'https://inatel.br/compsoft',
+                'txt': 'CompSoft 2023'
             },
         ]
 
@@ -360,6 +368,7 @@ const globalVersion = 0.2;
             <div class="swiper-slide">\n\
                 <a target="_blank" href="' + event['url'] + '">\n\
                     <img class="img-fluid" src="images/agenda/' + event['img'] + '">\n\
+                    <p class="p-large" style="margin-top: 1rem;">' + event['txt'] + '</p>\n\
                 </a>\n\
             </div>\n\n'
         });
