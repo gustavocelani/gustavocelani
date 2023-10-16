@@ -35,6 +35,9 @@ const globalVersion = 0.2;
         // Set Copyright Version Text
         $('#copyright-version-text').html('Developed and Maintained By <span class="blue">Gustavo Celani</span> - v' + globalVersion)
 
+        // Videos
+        youtubeVideoSetup("rootme-youtube-player", "6oRoklr0Fd8");
+
         // Dynamically Populated Content
         populateTestimonials();
         populateAgendaSlider();
@@ -268,6 +271,21 @@ const globalVersion = 0.2;
     $(".button, a, button").mouseup(function() {
         $(this).blur();
     });
+
+    /***************************************************************************************************************************************************/
+    /* YouTube Videos */
+    /***************************************************************************************************************************************************/
+    function youtubeVideoSetup(elemnetId, videoId) {
+        const youtubeVideos = document.getElementsByClassName(elemnetId)
+        for (let i = 0; i < youtubeVideos.length; i++) {
+            youtubeVideos[i].src = 'https://www.youtube.com/embed/' + videoId
+                + '?autoplay=1' // Auto Play
+                + '&controls=1' // YouTube Controls
+                + '&rel=0'      // Related Videos
+                + '&loop=1'     // Loop
+                + '&fs=1'       // Full Screen
+        }
+    }
 
     /***************************************************************************************************************************************************/
     /* Dynamically Populate Testimonials */

