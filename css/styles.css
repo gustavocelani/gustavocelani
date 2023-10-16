@@ -19,7 +19,7 @@ html {
 	height: 100%;
 }
 
-body, p {
+body, p, textarea {
 	color: #f1f1f8;
 	font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
 }
@@ -322,6 +322,43 @@ a.white {
 
 .a-disabled {
 	text-decoration: none;
+}
+
+.code-block {
+	border-width: 0.1rem;
+	border-color: white;
+	border-style: solid;
+	padding: 0.4rem;
+	background-color: black;
+	color: white;
+	white-space: pre-line;
+	font-family: monospace;
+	word-wrap: break-word;
+}
+
+.command-line {
+	color: rgb(0, 255, 0);
+	white-space: pre-line;
+}
+
+.walk-img {
+	margin-bottom: 1rem;
+}
+
+.ctf-entry-div {
+	background-color: #272727;
+	padding: 2rem;
+}
+
+.ctf-entry-button {
+	background-color: #00c9db;
+}
+
+.fill-div {
+	display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
 }
 
 /***************************************************************************************************************************************************/
@@ -916,6 +953,19 @@ input[type='checkbox'] {
 
 .header-media-kit {
 	background: linear-gradient(to bottom right, rgba(72, 72, 212, 0), rgba(241, 104, 104, 0)), url('../images/backgrounds/hand-bw.jpg') center center no-repeat;
+	background-size: cover;
+	position: relative;
+
+	/* Create the parallax scrolling effect */
+	min-height: 500px;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.header-ctf {
+	background: linear-gradient(to bottom right, rgba(72, 72, 212, 0), rgba(241, 104, 104, 0)), url('../images/backgrounds/ppt-bg.png') center center no-repeat;
 	background-size: cover;
 	position: relative;
 
