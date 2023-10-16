@@ -142,7 +142,7 @@ const globalVersion = 0.2;
                 prevEl: '.swiper-button-prev',
             },
             spaceBetween: 30,
-            slidesPerView: 4,
+            slidesPerView: 3,
             breakpoints: {
                 // when window is <= 380px
                 380: {
@@ -166,7 +166,7 @@ const globalVersion = 0.2;
                 },
                 // when window is <= 1200px
                 1200: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                     spaceBetween: 30
                 },
             }
