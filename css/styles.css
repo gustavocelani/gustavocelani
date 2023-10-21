@@ -98,6 +98,10 @@ hr {
 	color: green;
 }
 
+.yellow {
+	color: yellow;
+}
+
 .red {
 	color: red;
 }
@@ -331,14 +335,23 @@ a.white {
 	padding: 0.4rem;
 	background-color: black;
 	color: white;
-	white-space: pre-line;
+	white-space: pre-wrap;
 	font-family: monospace;
 	word-wrap: break-word;
 }
 
+.code-detail {
+	border-width: 0.1rem;
+	border-color: white;
+	border-style: solid;
+	padding: 0.1rem;
+}
+
 .command-line {
 	color: rgb(0, 255, 0);
-	white-space: pre-line;
+	font-family: monospace;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 
 .walk-img {
@@ -346,11 +359,13 @@ a.white {
 }
 
 .ctf-entry-div {
+	margin-top: 2rem;
 	background-color: #272727;
 	padding: 2rem;
 }
 
 .ctf-entry-button {
+	margin-top: 2rem;
 	background-color: #00c9db;
 }
 
