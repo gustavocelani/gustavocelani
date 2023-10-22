@@ -360,12 +360,15 @@ a.white {
 
 .ctf-entry-div {
 	margin-top: 2rem;
+	margin-bottom: 4rem;
+}
+
+.ctf-entry-info {
 	background-color: #272727;
 	padding: 2rem;
 }
 
 .ctf-entry-button {
-	margin-top: 2rem;
 	background-color: #00c9db;
 }
 
