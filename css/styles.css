@@ -94,6 +94,10 @@ hr {
 	color: #00c9db;
 }
 
+.gold {
+	color: #d6bd68;
+}
+
 .green {
 	color: green;
 }
@@ -164,6 +168,7 @@ a.white {
 	text-decoration: none;
 }
 
+/* Button Solid Large */
 .btn-solid-lg {
 	display: inline-block;
 	padding: 1.375rem 2.625rem 1.375rem 2.625rem;
@@ -175,10 +180,27 @@ a.white {
 	text-decoration: none;
 	transition: all 0.2s;
 }
-
 .btn-solid-lg:hover {
 	background-color: transparent;
 	color: #00c9db;
+	text-decoration: none;
+}
+
+/* Button Solid Large Gold */
+.btn-solid-lg-gold {
+	display: inline-block;
+	padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+	border: 0.125rem solid #d6bd68;
+	border-radius: 2rem;
+	background-color: #d6bd68;
+	color: #fff;
+	font: 700 0.75rem/0 "Montserrat", sans-serif;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+.btn-solid-lg-gold:hover {
+	background-color: transparent;
+	color: #d6bd68;
 	text-decoration: none;
 }
 
@@ -245,6 +267,20 @@ a.white {
 }
 
 .btn-solid-lg .fas {
+	/* margin-right: 0.5rem; */
+	font-size: 1.75rem;
+	line-height: 0;
+	vertical-align: top;
+}
+
+.btn-solid-lg-gold .fab {
+	/* margin-right: 0.5rem; */
+	font-size: 1.75rem;
+	line-height: 0;
+	vertical-align: top;
+}
+
+.btn-solid-lg-gold .fas {
 	/* margin-right: 0.5rem; */
 	font-size: 1.75rem;
 	line-height: 0;
